@@ -1,0 +1,33 @@
+.title{
+    display: grid;
+    grid-template-areas: "a b";
+    margin-bottom: 25px;
+}
+.title h2{
+    grid-area: a;
+    justify-self: left;
+    align-self: center;
+}
+.title h5{
+    grid-area: b;
+    justify-self: end;
+    align-self: center;
+}
+.filter{
+    color: gray;
+}
+.details{
+    color: gray;
+    font-size: small;
+    width: 100%;
+    text-align: center;
+}
+.LineChart{
+    min-width: 40%;
+    min-height: 40%;
+    /* box-shadow: 0px 0px 20px 5px; */
+    border-color: gray;
+    border-radius: 10px;
+    padding: 25px;
+    background-color: white;
+}
