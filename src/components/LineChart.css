@@ -22,9 +22,17 @@
     width: 100%;
     text-align: center;
 }
+.yaxisDetails{
+    color: gray;
+    font-size: small;
+    width: 100%;
+    text-align:start;
+}
 .LineChart{
     min-width: 40%;
     min-height: 40%;
+    max-width: 70%;
+    max-height: 70%;
     /* box-shadow: 0px 0px 20px 5px; */
     border-color: gray;
     border-radius: 10px;

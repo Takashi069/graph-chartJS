@@ -7,44 +7,39 @@ import { Line } from "react-chartjs-2";
 import Controls from "./Controls"
 import "./LineChart.css"
 
-const LineChart = ({title, filterOption}) => {
+const LineChart = ({title, filterOption,axisLabels}) => {
+
+  
   const chart = useRef(null)
 
-  const [labels,setLabels] = useState(['W','Th','F','S','Su','M','T'])
+  const [labels,setLabels] = useState(null)
 
-let data = {
-  labels: labels,
-  datasets: [
-    {
-      label: "My First dataset",
-      backgroundColor: "rgb(255, 99, 132)",
-      borderColor: "rgb(255, 99, 132)",
-      data: [0, 10, 5, 2, 20, 30, 45],
-    },
-    {
-      label: "My Second dataset",
-      backgroundColor: "rgb(150, 100, 132)",
-      borderColor: "rgb(150, 100, 132)",
-      data: [45, 10, 7, 6, 20, 90],
-    },
-    {
-      label: "My third dataset",
-      backgroundColor: "rgb(200, 80, 132)",
-      borderColor: "rgb(200, 80, 132)",
-      data: ['60','120',0,0,0,0],
-    },
-  ],
-};
+  const [data,setData] = useState({
+    labels: labels,
+    datasets: [      
+    ],
+  })
+  useEffect(()=>{
+    setData(prevData=>(
+      {
+        ...prevData,
+        labels:labels
+      }
+    )
+      
+    )
+  },[labels])
 
-  const [dataset,setDataSet] = useState({label:"NULL",backgroundColor:"rgb(100,150,50)",borderColor:"rgb(100,150,50)",data: []})
   const [graphTitle, setGraphTitle] = useState(title)
   const [xAxisName, setXAxisName] = useState("29 April - May 04 2021")
+  const [yAxisName, setYAxisName] = useState("")
+  const [yaxisStepSize, setYAxisStepSize] = useState(0)
+  const [yfontSize, setYFontSize] = useState(10)
+  const [xfontSize, setXFontSize] = useState(10)
+
   // const datasample3 = "[[W, Yellow], [T, Red], [F, Blue]]"
   // const datasample4 = "[[20, 10], [10, 50], [70, 30]]"
 
-  const handleCallback = (controllerData)=>{
-    setLabels(controllerData);
-  }
   return (
     <div className="wrapper">
       <div className="LineChart">
@@ -52,7 +47,11 @@ let data = {
         <h2>{graphTitle}</h2>
         <h5 className="filter">{filterOption}</h5>
       </div>
+      
 {/* //---------------------GRAPH--------------------------- */}
+    <div className="yaxisDetails">
+        {yAxisName}
+      </div>
       <Line data={data} ref={chart} options={{
         plugins:{
           legend:{
@@ -61,7 +60,18 @@ let data = {
           tooltip:{
             enabled:true,
             backgroundColor:"#ffffff",
-            bodyColor:"#000000"
+            bodyColor:"#000000",
+            titleColor: "#000000",
+            titleAlign: "center",
+            titleFont:{
+              weight:"normal"
+            }
+          }
+        },
+        elements:{
+          point:{
+            radius:4,
+            hoverRadius:8
           }
         },
         scales: {
@@ -71,13 +81,26 @@ let data = {
                 display: false
              },
              border:{
-              width:5,
+              width:3,
               color:"#898989"
+             },
+             ticks:{
+              font:{
+                size:xfontSize
+              }
              }
           },
           y: {
             border:{
               display:false,
+            },
+            ticks:{
+              align:'end',
+              crossAlign:"center",
+              stepSize:yaxisStepSize,
+              font:{
+                size:yfontSize
+              } 
             }
           }
         }
@@ -95,9 +118,8 @@ let data = {
           // setLabels(['W','F','T'])
     }}>Sample4</button> */}
     </div>
-    <titleContext.Provider value={[setGraphTitle,setXAxisName,setLabels]} >
-      <Controls labels={labels} setLabels={setLabels}/>Labels
-      <div>{labels}</div>
+    <titleContext.Provider value={[setGraphTitle,setXAxisName,setYAxisName,setLabels,setData,setYAxisStepSize,setYFontSize,setXFontSize]} >
+      <Controls labels={labels} setLabels={setLabels} data={data} title={title} xAxisName={xAxisName}/>
     </titleContext.Provider>
   </div>
     

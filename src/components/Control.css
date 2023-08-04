@@ -1,24 +1,53 @@
 .control-parent{
     margin-top: 20px;
-    display: flex;
-    flex-direction: column;
-    min-width: 50%;
-    min-height: 40%;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    gap: 20px;
+    min-width: 400px;
+    min-height: 200px;
     justify-content: center;
-    align-items: center;
+    align-items: start;
 }
 
 .control{
     display: flex;
     flex-direction: column;
-    max-width: 60%;
+    max-width: 100%;
 }
 .control label{
     margin-top: 10px;
 }
-.control input{
+.input-field{
     padding:10px;
     border:none;
     margin-top: 10px;
     border-radius: 5px;
+}
+
+.data-color{
+    margin-left: 10px;
+}
+button{
+    padding: 10px;
+    border:none;
+    cursor: pointer;
+}
+
+.buttonGroup{
+    display: grid;
+    grid-template-areas: "a b";
+    gap:5px;
+    margin-top: 10px;
+}
+.remove-button{
+    grid-area: a;
+}
+.submit-button{
+    grid-area: b;
+}
+.label-info{
+    width: 70%;
+    min-height: 25px;
+    background-color: #EFEFEF;
+
 }
